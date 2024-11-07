@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+int main() {
+    std::string productA = "Product A";
+    std::string productB = "Product B";
+    std::string productC = "Product C";
+    double priceA = 10.0;  
+    double priceB = 15.0;
+    double priceC = 20.0; 
+    int stockA = 10;  
+    int stockB = 5;   
+    int stockC = 8;   
+    int quantityA, quantityB, quantityC;
+    std::cout << "Enter quantity for " << productA << " (Available: " << stockA << "): ";
+    std::cin >> quantityA;
+    if (quantityA > stockA) {
+        std::cout << "Sorry, only " << stockA << " units of " << productA << " are available.\n";
+        quantityA = stockA;  // Adjust the quantity to available stock
+    }
+    std::cout << "Enter quantity for " << productB << " (Available: " << stockB << "): ";
+    std::cin >> quantityB;
+    if (quantityB > stockB) {
+        std::cout << "Sorry, only " << stockB << " units of " << productB << " are available.\n";
+        quantityB = stockB;  // Adjust the quantity to available stock
+    }
+    std::cout << "Enter quantity for " << productC << " (Available: " << stockC << "): ";
+    std::cin >> quantityC;
+    
+    if (quantityC > stockC) {
+        std::cout << "Sorry, only " << stockC << " units of " << productC << " are available.\n";
+        quantityC = stockC;  // Adjust the quantity to available stock
+    }
+    double subtotal = (priceA * quantityA) + (priceB * quantityB) + (priceC * quantityC);
+
+    // Discount calculation (10% discount if subtotal is above $50)
+    double discount = (subtotal > 50) ? subtotal * 0.10 : 0.0;
+    double totalAfterDiscount = subtotal - discount;
+    double shippingFee = (totalAfterDiscount > 100) ? 0.0 : 10.0;
+    double taxRate = 0.08;
+    double salesTax = totalAfterDiscount * taxRate;
+    double finalTotal = totalAfterDiscount + salesTax + shippingFee;
+    int loyaltyPoints = static_cast<int>(finalTotal / 5);
+    std::cout << std::fixed << std::setprecision(2); // Setting precision for currency format
+    std::cout << "\nOrder Summary:\n";
+    std::cout << productA << " (x" << quantityA << "): $" << priceA * quantityA << std::endl;
+    std::cout << productB << " (x" << quantityB << "): $" << priceB * quantityB << std::endl;
+    std::cout << productC << " (x" << quantityC << "): $" << priceC * quantityC << std::endl;
+    std::cout << "\nSubtotal: $" << subtotal << std::endl;
+    std::cout << "Discount Applied: -$" << discount << std::endl;
+    std::cout << "Shipping Fee: $" << shippingFee << std::endl;
+    std::cout << "Sales Tax: $" << salesTax << std::endl;
+    std::cout << "Total Amount to Pay: $" << finalTotal << std::endl;
+    std::cout << "Loyalty Points Earned: " << loyaltyPoints << " points" << std::endl;
+    return 0;
+}
